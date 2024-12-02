@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs, io};
+use std::{collections::HashMap, fs, io, iter::zip};
 
 fn main() -> io::Result<()> {
     let input = fs::read_to_string("./src/input.txt")?;
@@ -26,9 +26,7 @@ fn day1(input: &str) -> u32 {
     first_column.sort();
     second_column.sort();
 
-    first_column
-        .into_iter()
-        .zip(second_column.into_iter())
+    zip(first_column, second_column)
         .map(|(x, y)| x.abs_diff(y))
         .sum()
 }
