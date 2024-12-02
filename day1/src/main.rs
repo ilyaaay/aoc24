@@ -9,7 +9,7 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
-fn day1(input: &str) -> i32 {
+fn day1(input: &str) -> u32 {
     let (first_column, second_column): (Vec<i32>, Vec<i32>) = input
         .lines()
         .map(|line| {
@@ -28,8 +28,8 @@ fn day1(input: &str) -> i32 {
 
     first_column
         .into_iter()
-        .zip(second_column.iter())
-        .map(|(x, y)| (x - y).abs())
+        .zip(second_column.into_iter())
+        .map(|(x, y)| x.abs_diff(y))
         .sum()
 }
 
