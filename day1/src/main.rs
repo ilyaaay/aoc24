@@ -3,13 +3,13 @@ use std::{collections::HashMap, fs, io, iter::zip};
 fn main() -> io::Result<()> {
     let input = fs::read_to_string("./src/input.txt")?;
 
-    println!("{}", day1(&input));
-    println!("{}", day2(&input));
+    println!("{}", first_part(&input));
+    println!("{}", second_part(&input));
 
     Ok(())
 }
 
-fn day1(input: &str) -> u32 {
+fn first_part(input: &str) -> u32 {
     let (first_column, second_column): (Vec<i32>, Vec<i32>) = input
         .lines()
         .map(|line| {
@@ -31,7 +31,7 @@ fn day1(input: &str) -> u32 {
         .sum()
 }
 
-fn day2(input: &str) -> i32 {
+fn second_part(input: &str) -> i32 {
     let mut counts = HashMap::new();
     let mut first_column = Vec::new();
 
@@ -69,11 +69,11 @@ mod tests {
 
     #[test]
     fn day1_test() {
-        assert_eq!(day1(INPUT), 11);
+        assert_eq!(first_part(INPUT), 11);
     }
 
     #[test]
     fn day2_test() {
-        assert_eq!(day2(INPUT), 31);
+        assert_eq!(second_part(INPUT), 31);
     }
 }
