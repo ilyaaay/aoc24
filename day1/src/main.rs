@@ -80,16 +80,16 @@ const INPUT: &str = r#"3   4
 3   3"#;
 
 #[test]
-fn day1_test() {
+fn first_part_test() {
     assert_eq!(first_part(INPUT), 11);
 }
 
 #[test]
-fn day2_test() {
+fn second_part_test() {
     assert_eq!(second_part(INPUT), 31);
 }
 
 #[test]
-fn day1_test_experimental() {
+fn first_part_test_experimental() {
     assert_eq!(first_part_experimental(INPUT), 11);
 }
