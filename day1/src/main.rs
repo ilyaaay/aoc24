@@ -10,7 +10,7 @@ fn main() -> io::Result<()> {
 }
 
 fn first_part(input: &str) -> u32 {
-    let (first_column, second_column): (Vec<i32>, Vec<i32>) = input
+    let (mut first_column, mut second_column): (Vec<i32>, Vec<i32>) = input
         .lines()
         .map(|line| {
             line.split_whitespace()
@@ -19,9 +19,6 @@ fn first_part(input: &str) -> u32 {
         })
         .map(|x| (x[0], x[1]))
         .unzip();
-
-    let mut first_column = first_column;
-    let mut second_column = second_column;
 
     first_column.sort();
     second_column.sort();
@@ -56,24 +53,43 @@ fn second_part(input: &str) -> i32 {
     result
 }
 
-#[cfg(test)]
-mod tests {
-    use crate::*;
+fn parse_input_first_part(input: &str) -> Vec<(&str, &str)> {
+    input
+        .lines()
+        .map(|x| x.split_once("   ").unwrap())
+        .collect()
+}
 
-    const INPUT: &str = r#"3   4
+fn first_part_experimental(input: &str) -> u32 {
+    let (mut first, mut second): (Vec<i32>, Vec<i32>) = parse_input_first_part(input)
+        .into_iter()
+        .map(|(x, y)| (x.parse::<i32>().unwrap(), y.parse::<i32>().unwrap()))
+        .unzip();
+
+    first.sort();
+    second.sort();
+
+    zip(first, second).map(|(x, y)| x.abs_diff(y)).sum()
+}
+
+const INPUT: &str = r#"3   4
 4   3
 2   5
 1   3
 3   9
 3   3"#;
 
-    #[test]
-    fn day1_test() {
-        assert_eq!(first_part(INPUT), 11);
-    }
+#[test]
+fn day1_test() {
+    assert_eq!(first_part(INPUT), 11);
+}
 
-    #[test]
-    fn day2_test() {
-        assert_eq!(second_part(INPUT), 31);
-    }
+#[test]
+fn day2_test() {
+    assert_eq!(second_part(INPUT), 31);
+}
+
+#[test]
+fn day1_test_experimental() {
+    assert_eq!(first_part_experimental(INPUT), 11);
 }
