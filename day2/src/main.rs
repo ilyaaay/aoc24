@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs, io};
+use std::{fs, io};
 
 fn main() -> io::Result<()> {
     let input = fs::read_to_string("./src/input.txt")?;
@@ -9,35 +9,38 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
+enum ReportState {
+    Safe,
+    Unsafe,
+}
+
 fn first_part(input: &str) -> i32 {
-    input
-        .lines()
-        .map(|x| {
-            x.split_whitespace()
-                .filter_map(|s| s.parse().ok())
-                .collect::<Vec<i32>>()
-        })
-        .fold(0, |x, nums| {
-            match (nums.is_sorted_by(|x, y| x < y) || nums.is_sorted_by(|x, y| x > y))
-                && (nums.is_sorted_by(|x, &y| x.abs_diff(y) >= 1 && x.abs_diff(y) <= 3))
-            {
-                true => x + 1,
-                false => x,
-            }
-        })
+    let nums = input.lines().map(|x| {
+        x.split_whitespace()
+            .map(|x| x.parse::<i32>().unwrap())
+            .collect::<Vec<i32>>()
+    });
+    // .map(|nums| );
+
+    // println!("{:?}", nums);
+
+    1
+}
+
+fn check_nums_seq(nums: Vec<i32>) {
+    let mut iter = nums.iter();
+
+    for i in iter.clone() {
+        let x = iter.next();
+
+        println!("{:?}", x);
+
+        break;
+    }
 }
 
 fn second_part(input: &str) -> i32 {
-    let mut result = 0;
-
-    for i in input.lines() {
-        let nums = i
-            .split_whitespace()
-            .filter_map(|x| x.parse().ok())
-            .collect::<Vec<i32>>();
-    }
-
-    result
+    1
 }
 
 const INPUT: &str = r#"7 6 4 2 1
